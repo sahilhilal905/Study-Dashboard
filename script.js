@@ -1,18 +1,28 @@
 // -------------------------
-// Study Dashboard Script
+// Timer variables
 // -------------------------
 
-// Timer variables
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
 
 let timer = null;
-
-// Total study time
 let totalSeconds = 0;
 
-// Get HTML elements
+// -------------------------
+// Load saved data
+// -------------------------
+
+if(localStorage.getItem("studyTime")){
+
+    totalSeconds = Number(localStorage.getItem("studyTime"));
+
+}
+
+// -------------------------
+// HTML Elements
+// -------------------------
+
 const timerDisplay = document.querySelector("#timer h3");
 const totalHours = document.querySelector("#study p");
 
@@ -22,39 +32,50 @@ const resetBtn = document.querySelectorAll("#timer button")[2];
 const saveBtn = document.querySelector("#study button");
 
 // -------------------------
-// Update Timer Display
+// Show Total Study Time
 // -------------------------
 
-function updateDisplay(){
+function updateTotal(){
 
-    let h = String(hours).padStart(2,"0");
-    let m = String(minutes).padStart(2,"0");
-    let s = String(seconds).padStart(2,"0");
+    let totalH = Math.floor(totalSeconds / 3600);
+    let totalM = Math.floor((totalSeconds % 3600) / 60);
 
-    timerDisplay.textContent = `${h}:${m}:${s}`;
+    totalHours.textContent =
+    `Total Hours Today: ${totalH} Hours ${totalM} Minutes`;
 
 }
 
 // -------------------------
-// Start Timer
+// Update Timer
+// -------------------------
+
+function updateDisplay(){
+
+    timerDisplay.textContent =
+        String(hours).padStart(2,"0") + ":" +
+        String(minutes).padStart(2,"0") + ":" +
+        String(seconds).padStart(2,"0");
+
+}
+
+// -------------------------
+// Start
 // -------------------------
 
 function startTimer(){
 
-    if(timer !== null){
-        return;
-    }
+    if(timer != null) return;
 
     timer = setInterval(function(){
 
         seconds++;
 
-        if(seconds === 60){
+        if(seconds == 60){
             seconds = 0;
             minutes++;
         }
 
-        if(minutes === 60){
+        if(minutes == 60){
             minutes = 0;
             hours++;
         }
@@ -66,7 +87,7 @@ function startTimer(){
 }
 
 // -------------------------
-// Pause Timer
+// Pause
 // -------------------------
 
 function pauseTimer(){
@@ -77,7 +98,7 @@ function pauseTimer(){
 }
 
 // -------------------------
-// Reset Timer
+// Reset
 // -------------------------
 
 function resetTimer(){
@@ -101,17 +122,14 @@ function resetTimer(){
 function saveSession(){
 
     let sessionSeconds =
-        (hours * 3600) +
-        (minutes * 60) +
-        seconds;
+        (hours*3600)+(minutes*60)+seconds;
 
     totalSeconds += sessionSeconds;
 
-    let totalH = Math.floor(totalSeconds / 3600);
-    let totalM = Math.floor((totalSeconds % 3600) / 60);
+    // Save to Local Storage
+    localStorage.setItem("studyTime",totalSeconds);
 
-    totalHours.textContent =
-    `Total Hours Today: ${totalH} Hours ${totalM} Minutes`;
+    updateTotal();
 
     alert("Study Session Saved!");
 
@@ -120,7 +138,7 @@ function saveSession(){
 }
 
 // -------------------------
-// Button Events
+// Events
 // -------------------------
 
 startBtn.addEventListener("click",startTimer);
@@ -131,5 +149,10 @@ resetBtn.addEventListener("click",resetTimer);
 
 saveBtn.addEventListener("click",saveSession);
 
-// Show timer at start
+// -------------------------
+// Initial Load
+// -------------------------
+
 updateDisplay();
+
+updateTotal();
