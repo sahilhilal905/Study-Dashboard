@@ -1,158 +1,292 @@
 // ===============================
-// STUDY DASHBOARD SCRIPT
+// NEET STUDY DASHBOARD SCRIPT
 // ===============================
 
-// -------------------------------
-// Timer Variables
-// -------------------------------
+
+// DATE DISPLAY
+const dateElement = document.getElementById("date");
+
+if(dateElement){
+    const today = new Date();
+
+    dateElement.innerHTML =
+    today.toDateString();
+}
+
+
+
+// ===============================
+// STUDY TIMER
+// ===============================
+
 let seconds = 0;
-let minutes = 0;
-let hours = 0;
-
 let timer = null;
-let totalSeconds = 0;
 
-// -------------------------------
-// Today's Date
-// -------------------------------
-const today = new Date().toLocaleDateString();
+const timeDisplay = document.getElementById("time");
 
-// -------------------------------
-// Load Saved Data
-// -------------------------------
-const savedDate = localStorage.getItem("studyDate");
-const savedTime = localStorage.getItem("studyTime");
+function updateTimer(){
 
-if (savedDate === today) {
-    totalSeconds = Number(savedTime) || 0;
-} else {
-    totalSeconds = 0;
-    localStorage.setItem("studyDate", today);
-    localStorage.setItem("studyTime", 0);
-}
+    let hrs = Math.floor(seconds / 3600);
 
-// -------------------------------
-// HTML Elements
-// -------------------------------
-const timerDisplay = document.querySelector("#timer h3");
-const totalHours = document.querySelector("#study p");
+    let mins = Math.floor((seconds % 3600) / 60);
 
-const startBtn = document.querySelectorAll("#timer button")[0];
-const pauseBtn = document.querySelectorAll("#timer button")[1];
-const resetBtn = document.querySelectorAll("#timer button")[2];
-const saveBtn = document.querySelector("#study button");
+    let secs = seconds % 60;
 
-// -------------------------------
-// Update Timer Display
-// -------------------------------
-function updateDisplay() {
 
-    timerDisplay.textContent =
-        String(hours).padStart(2, "0") + ":" +
-        String(minutes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
+    timeDisplay.innerHTML =
+    `${String(hrs).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
 
 }
 
-// -------------------------------
-// Update Total Study Time
-// -------------------------------
-function updateTotal() {
 
-    let totalH = Math.floor(totalSeconds / 3600);
-    let totalM = Math.floor((totalSeconds % 3600) / 60);
+function startTimer(){
 
-    totalHours.textContent =
-        `Total Hours Today: ${totalH} Hours ${totalM} Minutes`;
+    if(timer === null){
 
-}
+        timer = setInterval(()=>{
 
-// -------------------------------
-// Start Timer
-// -------------------------------
-function startTimer() {
+            seconds++;
 
-    if (timer !== null) return;
+            updateTimer();
 
-    timer = setInterval(function () {
+        },1000);
 
-        seconds++;
-
-        if (seconds === 60) {
-            seconds = 0;
-            minutes++;
-        }
-
-        if (minutes === 60) {
-            minutes = 0;
-            hours++;
-        }
-
-        updateDisplay();
-
-    }, 1000);
+    }
 
 }
 
-// -------------------------------
-// Pause Timer
-// -------------------------------
-function pauseTimer() {
+
+
+function pauseTimer(){
 
     clearInterval(timer);
-    timer = null;
+
+    timer=null;
 
 }
 
-// -------------------------------
-// Reset Timer
-// -------------------------------
-function resetTimer() {
 
-    clearInterval(timer);
-    timer = null;
 
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
+function resetTimer(){
 
-    updateDisplay();
+    pauseTimer();
+
+    seconds=0;
+
+    updateTimer();
 
 }
 
-// -------------------------------
-// Save Study Session
-// -------------------------------
-function saveSession() {
 
-    let sessionSeconds =
-        (hours * 3600) +
-        (minutes * 60) +
-        seconds;
 
-    totalSeconds += sessionSeconds;
+// Button connections
 
-    localStorage.setItem("studyTime", totalSeconds);
-    localStorage.setItem("studyDate", today);
+const buttons=document.querySelectorAll("#timer button");
 
-    updateTotal();
 
-    alert("Study Session Saved!");
+if(buttons.length>=3){
 
-    resetTimer();
+buttons[0].onclick=startTimer;
+
+buttons[1].onclick=pauseTimer;
+
+buttons[2].onclick=resetTimer;
 
 }
 
-// -------------------------------
-// Button Events
-// -------------------------------
-startBtn.addEventListener("click", startTimer);
-pauseBtn.addEventListener("click", pauseTimer);
-resetBtn.addEventListener("click", resetTimer);
-saveBtn.addEventListener("click", saveSession);
 
-// -------------------------------
-// Initial Page Load
-// -------------------------------
-updateDisplay();
-updateTotal();
+
+// ===============================
+// STUDY SESSION SAVE
+// ===============================
+
+
+const saveButton=document.querySelector("#study button");
+
+
+if(saveButton){
+
+saveButton.onclick=function(){
+
+let subject=document.querySelector("#study select").value;
+
+let notes=document.querySelector("#study textarea").value;
+
+
+let session={
+
+subject:subject,
+
+notes:notes,
+
+time:new Date().toLocaleString(),
+
+duration:seconds
+
+};
+
+
+let sessions=
+JSON.parse(localStorage.getItem("sessions")) || [];
+
+
+sessions.push(session);
+
+
+localStorage.setItem(
+"sessions",
+JSON.stringify(sessions)
+);
+
+
+
+alert("Study Session Saved 🚀");
+
+
+// Reset timer after saving
+
+resetTimer();
+
+
+};
+
+}
+
+
+
+// ===============================
+// PROGRESS TRACKER
+// ===============================
+
+
+function updateProgress(){
+
+let checks=document.querySelectorAll(
+'input[type="checkbox"]'
+);
+
+
+let completed=0;
+
+
+checks.forEach(check=>{
+
+if(check.checked)
+completed++;
+
+});
+
+
+let percentage=
+Math.round(
+(completed/checks.length)*100
+);
+
+
+
+let bar=document.querySelector(
+".progress div"
+);
+
+
+if(bar){
+
+bar.style.width=
+percentage+"%";
+
+}
+
+
+localStorage.setItem(
+"progress",
+percentage
+);
+
+}
+
+
+
+// Save checkbox state
+
+const checkboxes=document.querySelectorAll(
+'input[type="checkbox"]'
+);
+
+
+checkboxes.forEach((box,index)=>{
+
+
+let saved=
+localStorage.getItem(
+"check_"+index
+);
+
+
+if(saved==="true")
+box.checked=true;
+
+
+
+box.addEventListener(
+"change",
+()=>{
+
+
+localStorage.setItem(
+"check_"+index,
+box.checked
+);
+
+
+updateProgress();
+
+
+});
+
+
+});
+
+
+
+updateProgress();
+
+updateTimer();
+
+
+
+// ===============================
+// DAILY QUOTE SYSTEM
+// ===============================
+
+
+const quotes=[
+
+"Success is built by small efforts repeated daily.",
+
+"Discipline beats motivation.",
+
+"Every chapter completed is a step closer to your dream.",
+
+"Future doctors are built one study session at a time.",
+
+"Consistency creates excellence."
+
+];
+
+
+const quoteElement=
+document.getElementById("quote");
+
+
+if(quoteElement){
+
+let random=
+Math.floor(
+Math.random()*quotes.length
+);
+
+
+quoteElement.innerHTML=
+quotes[random];
+
+}
