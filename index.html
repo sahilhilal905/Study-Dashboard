@@ -2,145 +2,485 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEET Study Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top left,#4b0082,transparent 35%),
+    radial-gradient(circle at bottom right,#8b0000,transparent 35%),
+    #050505;
+
+    color:white;
+    min-height:100vh;
+}
+
+
+header{
+    text-align:center;
+    padding:35px;
+}
+
+header h1{
+    font-size:42px;
+    background:linear-gradient(90deg,#ff004c,#a855f7);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+header p{
+    color:#ccc;
+    margin-top:10px;
+}
+
+
+nav{
+    width:90%;
+    margin:auto;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    padding:20px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+
+nav h2{
+    color:#c084fc;
+}
+
+
+nav ul{
+    list-style:none;
+}
+
+nav li{
+    margin:12px 0;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ff3366;
+}
+
+
+.container{
+    width:90%;
+    margin:30px auto;
+}
+
+
+section{
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 0 30px rgba(168,85,247,.15);
+
+}
+
+
+h2{
+
+    color:#d8b4fe;
+    margin-bottom:15px;
+
+}
+
+
+.card{
+
+background:rgba(0,0,0,.35);
+
+padding:20px;
+
+border-radius:18px;
+
+margin:15px 0;
+
+}
+
+
+button{
+
+background:linear-gradient(90deg,#ff004c,#8b5cf6);
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+select,textarea,input{
+
+background:#111;
+
+color:white;
+
+border:1px solid #7c3aed;
+
+padding:12px;
+
+border-radius:12px;
+
+width:100%;
+
+margin-top:10px;
+
+}
+
+
+
+textarea{
+
+height:100px;
+
+}
+
+
+
+.progress{
+
+height:20px;
+
+background:#222;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+.progress div{
+
+height:100%;
+
+width:0%;
+
+background:linear-gradient(90deg,#ff0033,#a855f7);
+
+}
+
+
+
+.stats{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+
+.stat{
+
+flex:1;
+
+min-width:150px;
+
+background:#10091c;
+
+padding:20px;
+
+border-radius:20px;
+
+text-align:center;
+
+}
+
+
+.stat h3{
+
+font-size:30px;
+
+color:#ff3366;
+
+}
+
+
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+color:#aaa;
+
+}
+
+
+</style>
+
 </head>
+
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>📚 STUDY DASHBOARD</h1>
-        <p>Learn • Focus • Achieve</p>
-    </header>
 
-    <!-- Table of Contents -->
-    <nav>
-        <h2>Table of Contents</h2>
-        <ul>
-            <li><a href="#home">🏠 Home</a></li>
-            <li><a href="#study">📚 Daily Study Tracker</a></li>
-            <li><a href="#timer">⏱️ Study Timer</a></li>
-            <li><a href="#goals">📅 Weekly Goals</a></li>
-            <li><a href="#progress">📈 Progress Tracker</a></li>
-            <li><a href="#break">☕ Break Reminder</a></li>
-            <li><a href="#coding">💻 Coding Checklist</a></li>
-        </ul>
-    </nav>
+<header>
 
-    <!-- Home -->
-    <section id="home">
-        <h2>🏠 Home</h2>
+<h1>🚀 NEET STUDY COMMAND CENTER</h1>
 
-        <p>Welcome to your Study Dashboard!</p>
+<p>Focus • Discipline • Growth</p>
 
-        <p>📅 Today's Date:</p>
+</header>
 
-        <p>🎯 Daily Goal: 7 Hours</p>
 
-        <p>📖 Quote of the Day:</p>
 
-        <p>⏱️ Hours Studied Today: 0 Hours</p>
-    </section>
+<nav>
 
-    <!-- Study Tracker -->
-    <section id="study">
+<h2>📌 Dashboard</h2>
 
-        <h2>📚 Daily Study Tracker</h2>
+<ul>
 
-        <p>Total Hours Today: 0 Hours</p>
+<li><a href="#home">🏠 Home</a></li>
 
-        <label for="subject">Subject</label><br>
+<li><a href="#study">📚 Study Tracker</a></li>
 
-        <select id="subject">
-            <option>Biology</option>
-            <option>Physics</option>
-            <option>Chemistry</option>
-            <option>Coding</option>
-        </select>
+<li><a href="https://sahilhilal905.github.io/Schedule" target="_blank">🗓️ Daily Schedule</a></li>
 
-        <br><br>
+<li><a href="#timer">⏱️ Study Timer</a></li>
 
-        <label for="notes">Notes</label><br>
+<li><a href="#goals">🎯 Weekly Goals</a></li>
 
-        <textarea id="notes" placeholder="Write today's study notes..."></textarea>
+<li><a href="#progress">📈 Progress</a></li>
 
-        <br><br>
+<li><a href="#coding">💻 Coding Skills</a></li>
 
-        <button>Save Study Session</button>
 
-    </section>
+</ul>
 
-    <!-- Timer -->
-    <section id="timer">
+</nav>
 
-        <h2>⏱️ Study Timer</h2>
 
-        <h3>00:00:00</h3>
 
-        <button>Start</button>
+<div class="container">
 
-        <button>Pause</button>
 
-        <button>Reset</button>
+<section id="home">
 
-    </section>
+<h2>🏠 Welcome</h2>
 
-    <!-- Weekly Goals -->
-    <section id="goals">
+<div class="stats">
 
-        <h2>📅 Weekly Goals</h2>
+<div class="stat">
+<h3>7+</h3>
+<p>Study Hours Target</p>
+</div>
 
-        <input type="checkbox"> Biology<br>
 
-        <input type="checkbox"> Physics<br>
+<div class="stat">
+<h3>5</h3>
+<p>Coaching Hours</p>
+</div>
 
-        <input type="checkbox"> Chemistry<br>
 
-        <input type="checkbox"> Coding<br>
+<div class="stat">
+<h3>1</h3>
+<p>Skill Hour</p>
+</div>
 
-    </section>
+</div>
 
-    <!-- Progress -->
-    <section id="progress">
+<br>
 
-        <h2>📈 Progress Tracker</h2>
+<p>🔥 Quote:</p>
 
-        <p>Overall Progress: 0%</p>
+<h3>Small progress every day creates massive results.</h3>
 
-    </section>
+</section>
 
-    <!-- Break Reminder -->
-    <section id="break">
 
-        <h2>☕ Break Reminder</h2>
 
-        <p>Take a 10-minute break after every 50 minutes of study.</p>
+<section id="study">
 
-    </section>
+<h2>📚 Daily Study Tracker</h2>
 
-    <!-- Coding Checklist -->
-    <section id="coding">
 
-        <h2>💻 Coding Checklist</h2>
+<div class="card">
 
-        <input type="checkbox"> Learn HTML<br>
+<label>Subject</label>
 
-        <input type="checkbox"> Learn CSS<br>
+<select>
 
-        <input type="checkbox"> Learn JavaScript<br>
+<option>Physics</option>
 
-        <input type="checkbox"> Push Project to GitHub<br>
+<option>Chemistry</option>
 
-    </section>
+<option>Botany</option>
 
-    <footer>
-        <p>Made by Sahil ❤️</p>
-    </footer>
+<option>Zoology</option>
 
-    <script src="script.js"></script>
+<option>Coding</option>
+
+</select>
+
+
+<label>Notes</label>
+
+<textarea placeholder="What did you study today?"></textarea>
+
+
+<br><br>
+
+<button>Save Session</button>
+
+
+</div>
+
+</section>
+
+
+
+
+<section id="timer">
+
+<h2>⏱️ Study Timer</h2>
+
+<div class="card">
+
+<h1 id="time">00:00:00</h1>
+
+<button>Start</button>
+
+<button>Pause</button>
+
+<button>Reset</button>
+
+
+</div>
+
+</section>
+
+
+
+
+<section id="goals">
+
+<h2>🎯 Weekly Goals</h2>
+
+
+<div class="card">
+
+<input type="checkbox"> Physics PYQs<br><br>
+
+<input type="checkbox"> Chemistry Revision<br><br>
+
+<input type="checkbox"> Biology NCERT<br><br>
+
+<input type="checkbox"> Coding Practice<br>
+
+
+</div>
+
+</section>
+
+
+
+
+<section id="progress">
+
+<h2>📈 Progress Tracker</h2>
+
+
+<p>Overall Completion</p>
+
+<div class="progress">
+
+<div></div>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section id="coding">
+
+<h2>💻 Coding Growth</h2>
+
+
+<div class="card">
+
+<input type="checkbox"> HTML Completed<br><br>
+
+<input type="checkbox"> CSS Completed<br><br>
+
+<input type="checkbox"> JavaScript Learning<br><br>
+
+<input type="checkbox"> Build Projects<br><br>
+
+<input type="checkbox"> Upload to GitHub
+
+</div>
+
+
+</section>
+
+
+
+</div>
+
+
+
+<footer>
+
+Made with ❤️ by Sahil | NEET + Technology Journey
+
+</footer>
+
+
 
 </body>
 
