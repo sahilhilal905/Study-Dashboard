@@ -1,146 +1,559 @@
-/* Reset */
+/* ===============================
+   NEET STUDY DASHBOARD PREMIUM UI
+   =============================== */
+
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
 }
 
-/* Body */
+
 body{
-    background-color:#f4f7fc;
-    font-family:Arial, Helvetica, sans-serif;
-    color:#333;
-    line-height:1.6;
-    padding:20px;
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top left,#5b21b6,transparent 35%),
+    radial-gradient(circle at bottom right,#b91c1c,transparent 35%),
+    #050505;
+
+    color:white;
+
+    padding-bottom:40px;
+
 }
 
-/* Header */
+
+
+/* HEADER */
+
 header{
+
     text-align:center;
-    padding:30px;
-    background:linear-gradient(90deg,#4facfe,#00f2fe);
-    color:white;
-    border-radius:15px;
-    margin-bottom:25px;
+
+    padding:40px 20px;
+
 }
+
 
 header h1{
-    font-size:3rem;
-    font-weight:bold;
+
+    font-size:clamp(28px,5vw,45px);
+
+    background:
+    linear-gradient(
+    90deg,
+    #ff1744,
+    #a855f7,
+    #ff4d6d
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    font-weight:900;
+
 }
+
 
 header p{
-    font-size:1.2rem;
+
     margin-top:10px;
+
+    color:#cbd5e1;
+
+    letter-spacing:2px;
+
 }
 
-/* Navigation */
+
+
+/* NAVIGATION */
+
 nav{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:25px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+
+    width:90%;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:25px;
+
+    border-radius:25px;
+
+
+    background:
+
+    rgba(255,255,255,0.08);
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.15);
+
+
+    box-shadow:
+
+    0 0 40px rgba(168,85,247,.25);
+
 }
+
 
 nav h2{
-    margin-bottom:10px;
+
+    color:#d8b4fe;
+
+    margin-bottom:15px;
+
 }
+
 
 nav ul{
+
     list-style:none;
+
 }
+
 
 nav li{
-    margin:10px 0;
+
+    margin:12px 0;
+
 }
+
 
 nav a{
+
+    color:white;
+
     text-decoration:none;
-    color:#0077cc;
-    font-weight:bold;
+
+    font-size:17px;
+
+    transition:.3s;
+
 }
+
 
 nav a:hover{
-    color:#ff6600;
+
+    color:#ff3366;
+
+    padding-left:10px;
+
 }
 
-/* Sections */
+
+
+/* MAIN CONTAINER */
+
+.container{
+
+    width:90%;
+
+    max-width:1000px;
+
+    margin:30px auto;
+
+}
+
+
+
+/* GLASS SECTIONS */
+
 section{
-    background:white;
-    padding:20px;
+
+
+    background:
+
+    rgba(255,255,255,0.08);
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
+    border-radius:25px;
+
+
+    padding:25px;
+
+
     margin-bottom:25px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.15);
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.5);
+
+
+    animation:
+
+    fade .6s ease;
+
+
 }
 
-section h2{
-    color:#0077cc;
-    margin-bottom:15px;
+
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
 }
 
-/* Inputs */
-input,
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+h2{
+
+    color:#e9d5ff;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* STAT CARDS */
+
+
+.stats{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.stat{
+
+    flex:1;
+
+    min-width:170px;
+
+
+    background:
+
+    linear-gradient(
+    145deg,
+    rgba(168,85,247,.2),
+    rgba(255,0,70,.15)
+    );
+
+
+    padding:25px;
+
+
+    border-radius:22px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+.stat h3{
+
+    font-size:35px;
+
+    color:#ff3366;
+
+}
+
+
+
+
+/* INNER CARDS */
+
+
+.card{
+
+    background:
+
+    rgba(0,0,0,.35);
+
+
+    padding:20px;
+
+
+    border-radius:20px;
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+
+/* INPUTS */
+
+
 select,
-textarea{
+textarea,
+input{
+
+
     width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:16px;
-}
 
-/* Textarea */
-textarea{
-    height:120px;
-    resize:vertical;
-}
 
-/* Buttons */
-button{
-    background:#0077cc;
+    background:#0f0f0f;
+
+
     color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    margin:5px;
+
+
+    border:
+
+    1px solid #9333ea;
+
+
+    border-radius:15px;
+
+
+    padding:12px;
+
+
+    margin-top:10px;
+
+
 }
+
+
+textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+
+
+/* BUTTONS */
+
+
+button{
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #ef4444,
+    #9333ea
+    );
+
+
+    color:white;
+
+
+    border:none;
+
+
+    padding:12px 28px;
+
+
+    border-radius:30px;
+
+
+    cursor:pointer;
+
+
+    margin:8px;
+
+
+    font-weight:bold;
+
+
+    transition:.3s;
+
+
+}
+
+
 
 button:hover{
-    background:#005fa3;
+
+
+    transform:scale(1.08);
+
+
+    box-shadow:
+
+    0 0 20px #9333ea;
+
+
 }
 
-/* Checkbox */
-input[type="checkbox"]{
-    width:auto;
-    margin-right:10px;
-}
 
-/* Footer */
-footer{
+
+/* TIMER */
+
+
+#time{
+
+
     text-align:center;
-    padding:20px;
-    margin-top:30px;
-    color:#666;
+
+
+    font-size:50px;
+
+
+    color:#fca5a5;
+
+
+    letter-spacing:3px;
+
+
 }
 
-/* Responsive */
-@media (max-width:768px){
 
-    body{
-        padding:10px;
-    }
 
-    header h1{
-        font-size:2rem;
-    }
+/* PROGRESS BAR */
 
-    button{
-        width:100%;
-    }
+
+.progress{
+
+
+    width:100%;
+
+
+    height:22px;
+
+
+    background:#222;
+
+
+    border-radius:30px;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+.progress div{
+
+
+    height:100%;
+
+
+    width:0%;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #ef4444,
+    #a855f7
+    );
+
+
+    transition:.5s;
+
+
+}
+
+
+
+/* CHECKBOX */
+
+input[type="checkbox"]{
+
+
+    width:auto;
+
+    accent-color:#a855f7;
+
+    margin-right:10px;
+
+}
+
+
+
+/* FOOTER */
+
+
+footer{
+
+
+    text-align:center;
+
+
+    color:#aaa;
+
+
+    padding:30px;
+
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:600px){
+
+
+header h1{
+
+font-size:28px;
+
+}
+
+
+section{
+
+padding:18px;
+
+}
+
+
+#time{
+
+font-size:35px;
+
+}
+
 
 }
